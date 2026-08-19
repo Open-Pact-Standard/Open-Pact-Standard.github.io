@@ -357,6 +357,7 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
     <li><strong>2. NOTICE</strong> — names you as Maintainer, your jurisdiction, your Standard Terms URL, and your OPL-AI choice.</li>
     <li><strong>3. SPDX headers</strong> — every source file now carries <code>SPDX-License-Identifier: OPL-1.4</code>.</li>
     <li><strong>4. Manifests</strong> — package files set <code>license = "OPL-1.4"</code>.</li>
+    <li><strong>5. (Optional) Canary tokens</strong> — run with <code>--canary</code> to embed provenance tokens via <code>origin-canary</code> (needed if you opt into OPL-AI enforcement). The token manifest is PRIVATE and git-ignored automatically.</li>
     </ul>
     <p class="lead">Your three next steps:</p>
     <ul class="steps-list">
@@ -403,7 +404,7 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
       </div>
     </div>
 
-    <p class="lead" style="margin-top:1.5rem">No license key to store, no sign-up. The <code>NOTICE</code> + <code>LICENSE</code> files in the repo <em>are</em> the contract. Unsure of your obligations on a specific repo? Run <code>opl_check.py --as-user &lt;repo&gt;</code> to see them in plain language. Respect the commercial terms and you are in the clear.</p>
+    <p class="lead" style="margin-top:1.5rem">No license key to store, no sign-up. The <code>NOTICE</code> + <code>LICENSE</code> files in the repo <em>are</em> the contract. Unsure of your obligations on a specific repo? Run <code>opl_check.py --as-user &lt;repo&gt;</code> to see them in plain language. Respect the commercial terms and you are in the clear. If the project uses OPL-AI canary tokens, those live in the source and are proven locally by the maintainer — they do not sync to any server, by design.</p>
   </div>
 </section>
 
