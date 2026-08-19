@@ -163,6 +163,15 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
 
 @media(max-width:960px){.grid-2,.grid-3{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
 @media(max-width:640px){.tabs{justify-content:flex-start;overflow-x:auto;max-width:100%}.footer-grid{grid-template-columns:1fr}.hero-stats{flex-direction:column;gap:1.2rem}}
+
+  .using-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; margin-top:1.5rem; }
+  .using-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.25rem 1.4rem; }
+  .using-card h3 { margin:0 0 .6rem; font-size:1.05rem; }
+  .using-card ul { margin:0; padding-left:1.1rem; }
+  .using-card li { margin:.35rem 0; line-height:1.5; }
+  .using-card.ok { border-left:4px solid #3fb950; }
+  .using-card.warn { border-left:4px solid #d29922; }
+
 </style>
 </head>
 <body>
@@ -201,6 +210,7 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
   <button class="tab-btn" role="tab" aria-selected="false" data-tab="tools">Tools</button>
   <button class="tab-btn" role="tab" aria-selected="false" data-tab="whatsnew">What&rsquo;s New</button>
   <button class="tab-btn" role="tab" aria-selected="false" data-tab="adopt">Adopt</button>
+  <button class="tab-btn" role="tab" aria-selected="false" data-tab="using">Using</button>
   <button class="tab-btn" role="tab" aria-selected="false" data-tab="faq">FAQ</button>
 </div>
 
@@ -288,7 +298,7 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
     <h2 class="panel-title">Studio workbench — for any agent.</h2>
     <p class="panel-desc">The Open-Pact Studio pairs OPL with a catalog of free, local tools for adopting, checking, migrating, and enforcing the license — usable from a browser, the CLI, or any agent harness via MCP.</p>
     <div class="grid grid-3">
-      <div class="card"><div class="icon">&#x1F38E;</div><h3>Adopt OPL</h3><p>Generate NOTICE + a Custom LICENSE from your choices. Preview first; write only when you confirm.</p></div>
+      <div class="card"><div class="icon">&#x1F38E;</div><h3>Adopt OPL (one command)</h3><p>Run the hardened one-command spine — NOTICE + SPDX + LICENSE swap + manifest + compliance VERDICT in a single step. The recommended default path. Lower-level <em>Adopt (preview)</em> and <em>Migrate</em> tools remain for advanced use.</p></div>
       <div class="card"><div class="icon">&#x1F527;</div><h3>Build a Custom OPL</h3><p>Assemble a bespoke variant from 8 vetted slots. Hard-block and fair-source checks run before you commit.</p></div>
       <div class="card"><div class="icon">&#x1F50D;</div><h3>Scan / Compliance</h3><p>Run opl_check against a repo to confirm LICENSE, NOTICE, SPDX, and OPL-AI are all in place.</p></div>
       <div class="card"><div class="icon">&#x1F9F0;</div><h3>Build Adoption Kit</h3><p>Assemble the Adoption Kit — docs and a worked example — as downloads.</p></div>
@@ -321,6 +331,14 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
     <div class="section-label">Get Started</div>
     <h2 class="panel-title">Adopt OPL in five minutes.</h2>
     <p class="panel-desc">No registry, no framework, no on-chain transactions. Five steps and you&rsquo;re done.</p>
+    <div class="card" style="border-color:#6cf">
+      <h3>One command (recommended)</h3>
+      <p>Skip the manual steps — the hardened <code>opl_adopt</code> spine runs the whole thing and prints a final VERDICT:</p>
+      <pre>python3 opl_adopt.py --maintainer "You &lt;you@example.com&gt;" \
+  --jurisdiction "United States" \
+  --terms-url "https://example.com/standard-terms"</pre>
+      <p class="panel-desc">Available from the Studio workbench, the CLI, or any agent harness via MCP (<code>adopt-1cmd</code>). The five steps below are the manual equivalent if you prefer to do it by hand.</p>
+    </div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><h3>Copy the License</h3><p>Add <code>LICENSE.md</code> to your repository root.</p></div>
       <div class="step"><div class="step-num">2</div><h3>Create NOTICE</h3><p>Copy <code>NOTICE.example</code> to <code>NOTICE</code>. Fill in the Maintainer name, contact, jurisdiction, and Standard Terms URL.</p></div>
@@ -328,7 +346,64 @@ footer{margin-top:2rem;border-top:1px solid var(--border);padding:3rem 0 2rem;ba
       <div class="step"><div class="step-num">4</div><h3>Add SPDX Identifier</h3><p>Add <code>SPDX-License-Identifier: OPL-1.4</code> to each source file header.</p></div>
       <div class="step"><div class="step-num">5</div><h3>Update Manifest</h3><p>Reference the license in <code>pyproject.toml</code>, <code>Cargo.toml</code>, or <code>package.json</code>.</p></div>
     </div>
-    <p class="panel-desc" style="margin-top:2rem"><a href="https://github.com/Open-Pact-Standard/license/blob/main/MINIMAL_SETUP.md" class="btn btn-primary" target="_blank" rel="noopener">Full Setup Guide &rarr;</a></p>
+    <a href="https://github.com/Open-Pact-Standard/license/blob/main/MINIMAL_SETUP.md" class="btn btn-primary" target="_blank" rel="noopener">Full Setup Guide &rarr;</a>
+    </div>
+
+    <div class="steps" style="margin-top:2rem">
+    <div class="section-label">After you run it — what you have &amp; what to do</div>
+    <p class="lead">The <code>opl_adopt</code> command leaves your repo with four artifacts. There is <strong>no license key, token, or account</strong> to store — you are the licensor by publishing these files.</p>
+    <ul class="steps-list">
+    <li><strong>1. LICENSE</strong> — the canonical Open-Pact License v1.4 text.</li>
+    <li><strong>2. NOTICE</strong> — names you as Maintainer, your jurisdiction, your Standard Terms URL, and your OPL-AI choice.</li>
+    <li><strong>3. SPDX headers</strong> — every source file now carries <code>SPDX-License-Identifier: OPL-1.4</code>.</li>
+    <li><strong>4. Manifests</strong> — package files set <code>license = "OPL-1.4"</code>.</li>
+    </ul>
+    <p class="lead">Your three next steps:</p>
+    <ul class="steps-list">
+    <li><strong>Publish</strong> your Standard Terms page at the URL you passed (a static HTML page with your pricing is enough).</li>
+    <li><strong>Commit</strong> the four artifacts above.</li>
+    <li><strong>(Optional)</strong> tag a release noting &ldquo;now under OPL-1.4.&rdquo;</li>
+    </ul>
+    </div>
+    </section>
+
+<!-- USING TAB -->
+<section class="tab-panel" id="panel-using" role="tabpanel">
+  <div class="container">
+    <div class="section-label">For Users of OPL Software</div>
+    <h2 class="display">Using software under the Open-Pact License</h2>
+    <p class="lead">OPL is a two-party license: it protects the maker <em>and</em> gives you, the user,
+      clear rights. If you found a project with <code>SPDX-License-Identifier: OPL-1.4</code> in its files,
+      here is what that means for you.</p>
+
+    <div class="using-grid">
+      <div class="using-card ok">
+        <h3>You may, for free</h3>
+        <ul>
+          <li>Use it for personal projects, education, and research — no payment, no account, no key.</li>
+          <li>Read, modify, and share the source (it stays public and readable by design).</li>
+          <li>Fork it and build on it for non-commercial purposes.</li>
+        </ul>
+      </div>
+      <div class="using-card warn">
+        <h3>Commercial use requires payment</h3>
+        <ul>
+          <li>Using it to make money requires the Maintainer's permission via their <strong>Standard Terms</strong>.</li>
+          <li>Find the terms at the <code>Standard Terms URL</code> printed in the project's <code>NOTICE</code> file — that page shows pricing and how to pay.</li>
+          <li>You choose how to comply: pay, or keep your use non-commercial.</li>
+        </ul>
+      </div>
+      <div class="using-card">
+        <h3>You are protected</h3>
+        <ul>
+          <li>If the Maintainer goes silent for <strong>36 consecutive months</strong> (configurable in NOTICE), the work automatically converts to <strong>Apache-2.0</strong> — no registry, no successor needed.</li>
+          <li>If <code>NOTICE</code> says <code>OPL-AI: opted in</code>, do not train AI models on the code.</li>
+          <li>If the Maintainer asks about your licensing, reply within 60 days.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:1.5rem">No license key to store, no sign-up. The <code>NOTICE</code> + <code>LICENSE</code> files in the repo <em>are</em> the contract. Respect the commercial terms and you are in the clear.</p>
   </div>
 </section>
 
